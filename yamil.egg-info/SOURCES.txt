@@ -1,0 +1,14 @@
+setup.py
+utilities/__init__.py
+utilities/auth_jwt/__init__.py
+utilities/conexion/__init__.py
+utilities/conexion/connection.py
+utilities/models/__init__.py
+utilities/models/model.py
+utilities/routes/__init__.py
+utilities/schemas/__init__.py
+utilities/schemas/schema.py
+yamil.egg-info/PKG-INFO
+yamil.egg-info/SOURCES.txt
+yamil.egg-info/dependency_links.txt
+yamil.egg-info/top_level.txt
