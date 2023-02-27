@@ -5,7 +5,7 @@ import uvicorn
 from utilities.schemas.schema import List_empleados,List_Depar,List_job
 from fastapi.middleware.cors import CORSMiddleware
 from utilities.autentication.autenticacion import authenticate
-from utilities.models.model import crear_tablas,cargar_tabla
+from utilities.models.model_sync import crear_tablas,cargar_tabla
 from utilities.routes.user import User
 from fastapi import HTTPException
 
@@ -48,7 +48,7 @@ async def  validate_request (request : Request):
 @app.on_event("startup")
 async def create_tables ():
 
-    await crear_tablas()
+    crear_tablas()
     print ("tablas creadas ")
 
 
@@ -57,7 +57,7 @@ async def origin (job: List_job  = Depends (validate_request),user: str = Depend
 
     if job != None:
 
-        await cargar_tabla ("public.job",job["items"])
+        cargar_tabla ("job",job["items"])
         return ({"estado":"se cargaron items en tabla job"})
         
         
@@ -70,7 +70,7 @@ async def origin (departamento: List_Depar  = Depends (validate_request),user: s
 
     if departamento != None:
 
-        await cargar_tabla ("public.departamento",departamento["items"])
+        cargar_tabla ("departamento",departamento["items"])
         return ({"estado":"se cargaron items en tabla departamento"})
         
 
@@ -81,7 +81,7 @@ async def origin (empleados: List_empleados  = Depends (validate_request),user: 
 
     if empleados != None:
 
-        await cargar_tabla ("public.empleados",empleados["items"])
+        cargar_tabla ("empleados",empleados["items"])
         return ({"estado":"se cargaron items en tabla empleados"})
         
 
@@ -93,7 +93,8 @@ async def origin (empleados: List_empleados  = Depends (validate_request),user: 
 
 app.include_router(User,prefix="/user")
 
-#if "__name__" == '__main__':
+if "__name__" == '__main__':
+  
 
-#    uvicorn.run("main:app", host="0.0.0.0", port=8080)
+  uvicorn.run("main:app", host="0.0.0.0", port=8080)
 

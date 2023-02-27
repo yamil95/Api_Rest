@@ -14,7 +14,7 @@ class Esquema_empleado (BaseModel):
 
 class Esquema_departamento (BaseModel):
     id: int
-    name_departamento : str
+    name_department : str
 
 
 class Esquema_job (BaseModel):
