@@ -3,13 +3,15 @@ from pydantic import BaseModel
 from typing import List
 
 
+
+
 class Esquema_empleado (BaseModel):
 
-    id : int
+    id_empleado : int
     name : str
     datetime : str
     departamento_id : int
-    job_id : int
+    job_id : int 
 
 
 class Esquema_departamento (BaseModel):

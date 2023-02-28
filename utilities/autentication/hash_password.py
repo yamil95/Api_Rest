@@ -1,7 +1,9 @@
 from passlib.context import CryptContext 
+import os
 
-
-pwd_context = CryptContext(schemes=["bcrypt"],deprecated = "auto")
+schemes = os.getenv("schemes")
+deprecated = os.getenv("deprecated")
+pwd_context = CryptContext(schemes=[schemes],deprecated = deprecated)
 
 
 class HashPassword:

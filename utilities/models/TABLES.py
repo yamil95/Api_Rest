@@ -49,9 +49,8 @@ TABLES_TO_CREATE = {
     "tabla_log" : """
 
                     CREATE TABLE IF  NOT EXISTS log (
-                        fecha Varchar(30),
                         usuario varchar(100),
-                        hora varchar (30),
+                        fecha Varchar(30),
                         estado varchar (30)
                     )
             

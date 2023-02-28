@@ -6,6 +6,7 @@ from utilities.autentication.hash_password import HashPassword
 from fastapi import HTTPException,status
 from utilities.autentication.jwt_auth import create_access_token
 from fastapi.security import OAuth2PasswordRequestForm
+from utilities.models.model_sync import insert_log
 
 User = APIRouter()
 hasher = HashPassword()
@@ -21,7 +22,7 @@ def verificar_usuario_existe (email : str ) :
 
     datos = cursor.execute (query)
   
-    return datos.fetchone()
+    return datos.fetchall()
     
 
 def agregar_user (user : dict):
@@ -49,6 +50,7 @@ async def agregar_usuario (user: Esquema_user):
 
     if len (verificar_usuario_existe (user.username)) == 0:
         agregar_user(user)
+        return ("usuario creado")
     
     else :
 
@@ -62,11 +64,13 @@ async def signing_user (user: OAuth2PasswordRequestForm = Depends() ):
 
     usuario = verificar_usuario_existe (email)
     
-    valido = hasher.verify_hash(password,usuario[1])
+    valido = hasher.verify_hash(password,usuario[0][1])
 
     if valido : 
        
         token = await create_access_token (email)
+        insert_log (email,f"token: {token}")
         return {"access_token": token, "token_type":"Bearer"}
     else:
+        insert_log (email,"intento autenticarse sin exito")
         return {"result": "usuario no reconocido"}

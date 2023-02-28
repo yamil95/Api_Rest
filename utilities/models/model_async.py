@@ -116,40 +116,4 @@ async def cargar_tabla (nombre_tabla:str, valores : list):
 
 
 
-
-
-"""
-def crear_tablas ():
-    conexion_db = engine.connect().execution_options(autocommit = True)    
-
-    for tabla in lista_tablas:
-
-        conexion_db.execute(text(tabla))
-    
-    conexion_db.close()
-
-def cargar_tabla (nombre_tabla : str , valores : list):
-
-   
-    conexion = engine.connect().execution_options(autocommit = True)
-
-    for elemento in valores :
-
-        id_job = elemento["id"]
-        name_job = elemento["name_job"]
-        insert = f"""
-        #        INSERT INTO {nombre_tabla}
-        #        (id,nombre_job)
-        #        
-        #        VALUES ({id_job}, \'{name_job}\')
-
-
-        #    """
-        
-        
-        #conexion.execute(text (insert))
-    
-    
-    #conexion.close()
-
  

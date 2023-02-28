@@ -5,8 +5,8 @@ import jwt
 from fastapi import Depends, HTTPException, status 
 from fastapi.security import OAuth2PasswordBearer
 import os 
-
-SECRET_KEY = os.getenv("SECRET_KEY") #"ALONDRA_ANDREA_yamil"
+from utilities.models.model_sync import insert_log
+SECRET_KEY = os.getenv("SECRET_KEY") 
 ALGORI = os.getenv ("ALGORI")
 
 
@@ -23,9 +23,11 @@ async def verify_access_token(token: str) -> dict:
         if expire is None:
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="error en la conformacion del token") 
         if datetime.utcnow() > datetime.utcfromtimestamp(expire): 
+            insert_log ("none","se intento acceder con un token vencido")
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Token vencido") 
         return data 
     except : 
+        insert_log ("none","se intento acceder con un token no valido")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="token invalido")
 
 
