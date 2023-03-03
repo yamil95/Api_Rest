@@ -15,10 +15,29 @@ def crear_tablas ():
             
 def cargar_tabla (nombre_tabla:str, valores : list):
 
-    valor = lambda x : "id" if nombre_tabla!= "empleados" else "id_empleado"
-    df = pd.DataFrame(valores).set_index(valor(nombre_tabla))
-    print (df.head())
-    df.to_sql (nombre_tabla,con=engine,if_exists="replace")
+    
+    
+
+    if nombre_tabla != "empleados":
+         cursor = engine.cursor()
+         for valor in valores:
+             valor = tuple (valor.values() )
+             cursor.execute(f"INSERT OR REPLACE INTO {nombre_tabla} (id,name) VALUES (?,?)",valor)
+             engine.commit()
+    
+    
+    else : 
+        cursor = engine.cursor()
+        for valor in valores:
+            valor = tuple (valor.values() )
+            cursor.execute(f"INSERT OR REPLACE INTO {nombre_tabla} (id_empleado,name,datetime,id_departamento,id_job) VALUES (?,?,?,?,?)",valor)
+            engine.commit()
+    
+    cursor.close() 
+            
+
+    
+    
 
 
 def insert_log (usuario,estado):

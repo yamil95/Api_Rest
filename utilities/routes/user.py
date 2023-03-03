@@ -21,6 +21,7 @@ def verificar_usuario_existe (email : str ) :
     cursor = engine.cursor()
 
     datos = cursor.execute (query)
+    
   
     return datos.fetchall()
     

@@ -1,0 +1,79 @@
+digraph G {
+concentrate=true;
+splines="ortho";
+rankdir="LR";
+subgraph legend{
+    rank = min;
+    label = "legend";
+    Legend [shape=none, margin=0, label = <
+        <table cellspacing="0" cellpadding="0" border="1"><tr><td>Code2flow Legend</td></tr><tr><td>
+        <table cellspacing="0">
+        <tr><td>Regular function</td><td width="50px" bgcolor='#cccccc'></td></tr>
+        <tr><td>Trunk function (nothing calls this)</td><td bgcolor='#966F33'></td></tr>
+        <tr><td>Leaf function (this calls nothing else)</td><td bgcolor='#6db33f'></td></tr>
+        <tr><td>Function call</td><td><font color='black'>&#8594;</font></td></tr>
+        </table></td></tr></table>
+        >];
+}node_a87f9d5d [label="8: authenticate()" name="autenticacion::authenticate" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_46546ada [label="11: create_hash()" name="hash_password::HashPassword.create_hash" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_a52ad5c3 [label="14: verify_hash()" name="hash_password::HashPassword.verify_hash" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_fe58761f [label="13: create_access_token()" name="jwt_auth::create_access_token" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_0a01d8b1 [label="19: verify_access_token()" name="jwt_auth::verify_access_token" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_f183a636 [label="27: insert_log()" name="model_sync::insert_log" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_1f277074 [label="29: agregar_user()" name="user::agregar_user" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_e1a4c2f6 [label="50: agregar_usuario()" name="user::agregar_usuario" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_90baa328 [label="61: signing_user()" name="user::signing_user" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_c2ddc7a0 [label="14: verificar_usuario_existe()" name="user::verificar_usuario_existe" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_a87f9d5d -> node_0a01d8b1 [color="#0072B2" penwidth="2"];
+node_0a01d8b1 -> node_f183a636 [color="#E69F00" penwidth="2"];
+node_0a01d8b1 -> node_f183a636 [color="#E69F00" penwidth="2"];
+node_1f277074 -> node_46546ada [color="#F0E442" penwidth="2"];
+node_e1a4c2f6 -> node_1f277074 [color="#D55E00" penwidth="2"];
+node_e1a4c2f6 -> node_c2ddc7a0 [color="#D55E00" penwidth="2"];
+node_90baa328 -> node_a52ad5c3 [color="#000000" penwidth="2"];
+node_90baa328 -> node_fe58761f [color="#000000" penwidth="2"];
+node_90baa328 -> node_f183a636 [color="#000000" penwidth="2"];
+node_90baa328 -> node_f183a636 [color="#000000" penwidth="2"];
+node_90baa328 -> node_c2ddc7a0 [color="#000000" penwidth="2"];
+subgraph cluster_a28b97e8 {
+    node_a87f9d5d;
+    label="File: autenticacion";
+    name="autenticacion";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_40bc5df5 {
+    label="File: hash_password";
+    name="hash_password";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_d9e83dad {
+        node_46546ada node_a52ad5c3;
+        label="Class: HashPassword";
+        name="HashPassword";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_5213fe78 {
+    node_fe58761f node_0a01d8b1;
+    label="File: jwt_auth";
+    name="jwt_auth";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_3f2cbc8d {
+    node_f183a636;
+    label="File: model_sync";
+    name="model_sync";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_10899e09 {
+    node_c2ddc7a0 node_1f277074 node_e1a4c2f6 node_90baa328;
+    label="File: user";
+    name="user";
+    style="filled";
+    graph[style=dotted];
+};
+}

@@ -25,7 +25,7 @@ app.add_middleware(
 )
 
 
-async def validar_json (body : dict):
+def validar_json (body : dict):
 
     return True if "items" in body.keys() and len(body["items"]) <=1000 else False 
 

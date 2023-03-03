@@ -4,8 +4,8 @@ TABLES_TO_CREATE = {
                     
                     CREATE TABLE  IF NOT EXISTS departamento (
                     
-                    	id int,
-                    	name_department varchar (30)
+                    	id int PRIMARY KEY,
+                    	name varchar (30)
 
                     )
             
@@ -15,8 +15,8 @@ TABLES_TO_CREATE = {
                 
                     CREATE TABLE  IF NOT EXISTS job (
                     
-                    	id int,
-                    	name_job varchar (30)
+                    	id int PRIMARY KEY,
+                    	name varchar (30)
 
                     )
                     
@@ -27,7 +27,7 @@ TABLES_TO_CREATE = {
 
                     CREATE TABLE IF NOT EXISTS empleados (
 
-                        id_empleado int,
+                        id_empleado int PRIMARY KEY,
                         name Varchar(30),
                         datetime varchar(30),
                         id_departamento int,
